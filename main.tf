@@ -35,23 +35,23 @@ resource "aws_instance" "rabbitmq" {
   vpc_security_group_ids = [aws_security_group.sg.id]
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
   tags                   = merge({ Name = "${var.component}-${var.env}" }, var.tags)
-  subnet_id = var.subnet_id
-  user_data = templatefile("${path.module}/userdata.sh",
+  subnet_id              = var.subnet_id
+  user_data              = templatefile("${path.module}/userdata.sh",
     {
-      env = var.env
+      env       = var.env
       component = var.component
     })
 
   root_block_device {
-    encrypted = true
+    encrypted  = true
     kms_key_id = var.kms_key_id
   }
 }
 
 resource "aws_route53_record" "rabbitmq" {
   zone_id = var.zone_id
-  name = "${var.component}-${var.env}"
-  type = "A"
-  ttl = 30
+  name    = "${var.component}-${var.env}"
+  type    = "A"
+  ttl     = 30
   records = [ aws_instance.rabbitmq.private_ip]
 }
