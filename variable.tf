@@ -7,3 +7,4 @@ variable "vpc_id" {}
 variable "allow_ssh_cidr" {}
 variable "subnet_id" {}
 variable "zone_id" {}
+variable "kms_key_id" {}
