@@ -17,7 +17,7 @@ resource "aws_iam_policy" "policy" {
           "kms:Decrypt"
         ],
         "Resource" : [
-          "arn:aws:ssm:us-east-1:600222537277:parameter/roboshop.${var.env}.${var.component}.*",
+          "arn:aws:kms:us-east-1:765371225572:parameter/roboshop.${var.env}.${var.component}.*",
            var.kms_key_arn
           ]
       }
